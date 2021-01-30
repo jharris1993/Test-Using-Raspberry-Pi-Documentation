@@ -16,10 +16,10 @@ Please note that the camera modules are **not** designed to be hot pluggable. Th
 
 The camera software is under constant development. Please ensure your system is up to date prior to using these instructions.
 
-    ```
+
     sudo apt update
     sudp apt full-upgrade
-    ```
+
 
 ### Crypto Chip
 
@@ -57,12 +57,11 @@ Note: The default wiring uses GPIOs 2&3 to control the primary camera. These GPI
 
 The supplied camera applications `raspivid` and `raspistill` have the -cs (--camselect) option to specify which camera should be used.
 
-If you are writing your own camera application based on the MMAL API you can use the MMAL_PARAMETER_CAMERA_NUM parameter to set the current camera. E.g.
+If you are writing your own camera application based on the MMAL API you can use the MMAL_PARAMETER_CAMERA_NUM parameter to set the current camera. E.g
 
-    ```
     MMAL_PARAMETER_INT32_T camera_num = {{MMAL_PARAMETER_CAMERA_NUM, sizeof(camera_num)}, CAMERA_NUMBER};
     status = mmal_port_parameter_set(camera->control, &camera_num.hdr);
-    ```
+
 
 ## Advanced
 
@@ -115,40 +114,40 @@ The GPIOs that we are using for the camera default to input mode on the Compute 
 
 The `pin_config` section in the `pins_cm { }` (compute module), `pins_cm3 { }` (compute module3), or `pins_cm4 { }` (compute module 4) section of the source dts needs the camera's LED and power enable pins set to outputs:
 
-    ```
+
     pin@p2  { function = "output"; termination = "no_pulling"; };
     pin@p3  { function = "output"; termination = "no_pulling"; };
-    ```
+
 
 To tell the firmware which pins to use and how many cameras to look for, add the following to the `pin_defines` section:
 
-    ```
+
     pin_define@CAMERA_0_LED { type = "internal"; number = <2>; };
     pin_define@CAMERA_0_SHUTDOWN { type = "internal"; number = <3>; };
     pin_define@CAMERA_0_UNICAM_PORT { type = "internal"; number = <1>; };
     pin_define@CAMERA_0_I2C_PORT { type = "internal"; number = <0>; };
     pin_define@CAMERA_0_SDA_PIN { type = "internal"; number = <0>; };
     pin_define@CAMERA_0_SCL_PIN { type = "internal"; number = <1>; };
-    ```
+
 Indentation and line breaks are not critical, so the example files expand these blocks out for readability.
 
 The Compute Module's **pin_config** section needs the second camera's LED and power enable pins configured:
 
-    ```
+
     pin@p30 { function = "output"; termination = "no_pulling"; };
     pin@p31 { function = "output"; termination = "no_pulling"; };
-    ```
+
 
 In the Compute Module's **pin_defines** section of the dts file, change the **NUM_CAMERAS** parameter to 2 and add the following:
 
-    ```
+
     pin_define@CAMERA_1_LED { type = "internal"; number = <30>; };
     pin_define@CAMERA_1_SHUTDOWN { type = "internal"; number = <31>; };
     pin_define@CAMERA_1_UNICAM_PORT { type = "internal"; number = <0>; };
     pin_define@CAMERA_1_I2C_PORT { type = "internal"; number = <0>; };
     pin_define@CAMERA_1_SDA_PIN { type = "internal"; number = <28>; };
     pin_define@CAMERA_1_SCL_PIN { type = "internal"; number = <29>; };
-    ```
+
 
 <a name="sample-device-tree-source-files"></a>
 ### Sample device tree source files
