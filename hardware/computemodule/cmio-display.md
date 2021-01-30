@@ -1,6 +1,6 @@
 # Attaching Raspberry Pi Official 7" Display to the Compute Module IO Board
 
-These instructions are intended for advanced users, if anything is unclear please use the [Raspberry Pi Compute Module forums](https://www.raspberrypi.org/forums/viewforum.php?f=98) for technical help.
+These instructions are intended for advanced users, if anything is unclear please use the [Raspberry Pi Compute Module forums](https://www.raspberrypi.org/forums/viewforum.php?f=98) for technical help. test
 
 Please ensure your system software is updated before starting.
 
